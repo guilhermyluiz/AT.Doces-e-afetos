@@ -1,0 +1,553 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="AT Doces e Afeto — doces artesanais preparados com carinho para adoçar seus momentos.">
+
+    <meta name="theme-color" content="#F7EBDD">
+
+    <title>AT Doces e Afeto</title>
+
+    <!-- CSS PRINCIPAL -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- FONTES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- =================================
+         CABEÇALHO
+    ================================== -->
+
+    <header class="header">
+
+        <a href="#inicio" class="logo">
+            <span>AT</span>
+            <small>DOCES E AFETO</small>
+            <p>DOCES FEITOS COM AMOR</p>
+        </a>
+
+        <nav class="menu">
+            <a href="#inicio">Início</a>
+            <a href="#sobre">Sobre nós</a>
+            <a href="#produtos">Produtos</a>
+            <a href="#contato">Contato</a>
+        </nav>
+
+        <button
+            type="button"
+            class="btn-carrinho"
+            onclick="abrirCarrinho()">
+
+            🛒 Carrinho (
+            <span id="contadorCarrinho">0</span>
+            )
+
+        </button>
+
+    </header>
+
+
+    <!-- =================================
+         INÍCIO
+    ================================== -->
+
+    <section class="hero" id="inicio">
+
+        <div class="hero-content">
+
+            <span class="subtitulo">
+                AT DOCES E AFETO
+            </span>
+
+            <h1>
+                Um toque de<br>
+                <span>doçura</span> em cada<br>
+                momento.
+            </h1>
+
+            <p>
+                Sabores especiais preparados com carinho
+                para tornar seus momentos ainda mais doces.
+            </p>
+
+            <a href="#produtos" class="btn-principal">
+                Conheça nossos doces
+            </a>
+
+        </div>
+
+        <div class="hero-image">
+
+            <img
+                src="https://instasize.com/api/image/16e03a9ee07c4c20b4f3758db686e45cbc199058061abebd74a2b4666bc52c1f.jpeg"
+                alt="Doces especiais da AT Doces e Afeto">
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================
+         SOBRE NÓS
+    ================================== -->
+
+    <section class="sobre" id="sobre">
+
+        <span class="subtitulo">
+            UM POUCO SOBRE NÓS
+        </span>
+
+        <h2>
+            Feito com carinho,<br>
+            pensado para você.
+        </h2>
+
+        <p>
+            Na AT Doces e Afeto, acreditamos que os melhores
+            momentos merecem um toque especial de doçura.
+            Cada produto é preparado com dedicação,
+            cuidado e muito amor.
+        </p>
+
+        <p>
+            Nosso objetivo é levar sabor, carinho e felicidade
+            até você!
+        </p>
+
+    </section>
+
+
+    <!-- =================================
+         PRODUTOS
+         CARREGADOS PELO SUPABASE
+    ================================== -->
+
+    <section class="produtos" id="produtos">
+
+        <div class="section-title">
+
+            <span class="subtitulo">
+                NOSSO CARDÁPIO
+            </span>
+
+            <h2>
+                Delícias feitas para você
+            </h2>
+
+            <p>
+                Conheça nossas opções e escolha seu favorito.
+            </p>
+
+        </div>
+
+        <!--
+            Os produtos serão carregados automaticamente
+            da tabela public.produtos do Supabase.
+        -->
+
+        <div
+            class="produtos-grid"
+            id="produtosGrid">
+
+            <p class="produtos-status">
+                Carregando nossos doces...
+            </p>
+
+        </div>
+
+        <!-- VER MAIS PRODUTOS -->
+
+        <div
+            class="ver-mais-container"
+            id="verMaisContainer"
+            hidden>
+
+            <button
+                type="button"
+                class="btn-ver-mais"
+                id="btnVerMais"
+                aria-expanded="false"
+                onclick="alternarProdutos()">
+
+                Ver mais produtos
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================
+         CONTATO
+    ================================== -->
+
+    <section class="contato" id="contato">
+
+        <span class="subtitulo">
+            VAMOS ADOÇAR SEU DIA?
+        </span>
+
+        <h2>
+            Tire a sua dúvida!
+        </h2>
+
+        <p>
+            Entre em contato conosco pelo WhatsApp.
+        </p>
+
+        <a
+            href="#"
+            class="btn-principal"
+            onclick="pedirGeral(); return false;">
+
+            Falar pelo WhatsApp
+
+        </a>
+
+    </section>
+
+
+    <!-- =================================
+         MODAL DE PERSONALIZAÇÃO
+    ================================== -->
+
+    <div
+        class="modal-pedido"
+        id="modalPedido"
+        aria-hidden="true">
+
+        <div
+            class="modal-conteudo"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="nomeProduto">
+
+            <button
+                type="button"
+                class="fechar-modal"
+                onclick="fecharPersonalizacao()"
+                aria-label="Fechar">
+
+                &times;
+
+            </button>
+
+            <div class="modal-cabecalho">
+
+                <span class="subtitulo">
+                    MONTE SEU PEDIDO
+                </span>
+
+                <h2 id="nomeProduto">
+                    Personalize seu produto
+                </h2>
+
+                <p>
+                    Escolha as opções desejadas e conte
+                    como gostaria de receber seu doce.
+                </p>
+
+            </div>
+
+
+            <form id="formPedido">
+
+                <!-- SABOR -->
+
+                <div class="campo-pedido">
+
+                    <label for="saborProduto">
+                        Escolha seu sabor
+                    </label>
+
+                    <select id="saborProduto" required>
+
+                        <option value="">
+                            Selecione um sabor
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- QUANTIDADE -->
+
+                <div class="campo-pedido">
+
+                    <label for="quantidadeProduto">
+                        Quantidade
+                    </label>
+
+                    <input
+                        type="number"
+                        id="quantidadeProduto"
+                        min="1"
+                        step="1"
+                        value="1"
+                        required>
+
+                </div>
+
+
+                <!-- OBSERVAÇÕES -->
+
+                <div class="campo-pedido">
+
+                    <label for="observacoes">
+                        Observações adicionais
+                    </label>
+
+                    <textarea
+                        id="observacoes"
+                        placeholder="Conte como deseja seu produto..."
+                        rows="4"></textarea>
+
+                </div>
+
+
+                <!-- BOTÕES -->
+
+                <div class="modal-acoes">
+
+                    <button
+                        type="button"
+                        class="btn-voltar"
+                        onclick="fecharPersonalizacao()">
+
+                        Voltar aos produtos
+
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn-enviar-pedido">
+
+                        Adicionar ao carrinho
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================
+         MODAL DO CARRINHO
+    ================================== -->
+
+    <div
+        class="modal-carrinho"
+        id="modalCarrinho"
+        aria-hidden="true">
+
+        <div
+            class="carrinho-conteudo"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="tituloCarrinho">
+
+            <button
+                type="button"
+                class="fechar-modal"
+                onclick="fecharCarrinho()"
+                aria-label="Fechar">
+
+                &times;
+
+            </button>
+
+            <div class="modal-cabecalho">
+
+                <span class="subtitulo">
+                    SEU PEDIDO
+                </span>
+
+                <h2 id="tituloCarrinho">
+                    Meu carrinho
+                </h2>
+
+                <p>
+                    Confira seus produtos antes de finalizar.
+                </p>
+
+            </div>
+
+
+            <!-- LISTA DE PRODUTOS -->
+
+            <div
+                id="listaCarrinho"
+                class="lista-carrinho">
+
+                <div class="carrinho-vazio">
+                    Seu carrinho está vazio.
+                    Escolha seus doces favoritos! ❤️
+                </div>
+
+            </div>
+
+
+            <!-- TOTAL -->
+
+            <div class="carrinho-resumo">
+
+                <span>
+                    Total do pedido:
+                </span>
+
+                <strong id="totalCarrinho">
+                    R$ 0,00
+                </strong>
+
+            </div>
+
+
+            <!-- FINALIZAÇÃO -->
+
+            <form id="formFinalizar">
+
+                <div class="campo-pedido">
+
+                    <label for="nomeFinalizacao">
+                        Seu nome
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nomeFinalizacao"
+                        placeholder="Digite seu nome"
+                        required>
+
+                </div>
+
+
+                <div class="campo-pedido">
+
+                    <label for="pagamentoFinalizacao">
+                        Forma de pagamento
+                    </label>
+
+                    <select
+                        id="pagamentoFinalizacao"
+                        required>
+
+                        <option value="">
+                            Escolha uma forma de pagamento
+                        </option>
+
+                        <option value="Pix">
+                            Pix
+                        </option>
+
+                        <option value="Dinheiro">
+                            Dinheiro
+                        </option>
+
+                        <option value="Cartão de crédito">
+                            Cartão de crédito
+                        </option>
+
+                        <option value="Cartão de débito">
+                            Cartão de débito
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn-finalizar">
+
+                    Finalizar pedido pelo WhatsApp
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================
+         BOTÃO FLUTUANTE WHATSAPP
+    ================================== -->
+
+    <a
+        href="#"
+        class="whatsapp"
+        onclick="pedirGeral(); return false;"
+        aria-label="Falar pelo WhatsApp">
+
+        <img
+            src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+            alt="WhatsApp">
+
+    </a>
+
+
+    <!-- =================================
+         RODAPÉ
+    ================================== -->
+
+    <footer>
+
+        <div class="footer-logo">
+            AT Doces e Afeto
+        </div>
+
+        <p>
+            Doces feitos com amor e carinho.
+        </p>
+
+        <p class="copyright">
+            © 2026 AT Doces e Afeto.
+            Todos os direitos reservados.
+        </p>
+
+    </footer>
+
+
+    <!-- =================================
+         INTEGRAÇÃO SUPABASE
+    ================================== -->
+
+    <!-- Biblioteca oficial Supabase -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+        defer>
+    </script>
+
+    <!-- Configuração do banco -->
+    <script
+        src="js/supabase-config.js"
+        defer>
+    </script>
+
+    <!-- Sistema principal da loja -->
+    <script
+        src="js/script.js"
+        defer>
+    </script>
+
+</body>
+</html>
